@@ -9,17 +9,9 @@ from books_app.models import UserProfile, Book
 
 class UserProfileSerializer(serializers.ModelSerializer):
     '''UserProfile serializer.'''
-    # id = serializers.IntegerField(source='pk', read_only=True)
-    # email = serializers.SerializerMethodField()
-    # id = serializers.IntegerField(source='pk', read_only=True)
     first_name = serializers.CharField(source='user.first_name')
     email = serializers.CharField(source='user.email')
-    # password = serializers.CharField(max_length=128, source='user.password,read_only=True')
-    # first_name = serializers.SerializerMethodField()
-    # email = serializers.SerializerMethodField()
-    # country = serializers.SerializerMethodField()
-    # user = serializers.SerializerMethodField()
-    # country = serializers.UserProfileSerializer('country')
+
     class Meta:
         model = UserProfile
         fields = (
