@@ -4,3 +4,4 @@ mysql-connector-python
 django-mysql
 djangorestframework
 django-countries
+requests
