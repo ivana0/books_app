@@ -12,8 +12,8 @@ from books_app.views import BooksViewSet, UserProfileViewSet
 
 # Create a router and register our viewsets with it
 router = DefaultRouter()
-router.register(r'users', UserProfileViewSet, basename='users')     # Base URL: /books_app/users/
-router.register(r'books', BooksViewSet, basename='books')           # Base URL: /books_app/books/
+router.register(r'users', UserProfileViewSet)     # Base URL: /books_app/users/
+router.register(r'books', BooksViewSet)           # Base URL: /books_app/books/
 
 
 urlpatterns = [
