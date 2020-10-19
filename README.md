@@ -52,10 +52,10 @@ UserProfile views:
 	/books_app/users/
 	> Lists all users.
 - Retrieve:
-    /books_app/books/<pk>/
+    /books_app/books/<pk:int>/
     > Retrieves user record where pk is primary key for a user.
 - Delete:
-	/books_app/user/<pk>/
+	/books_app/user/<pk:int>/
 	> Delete user where pk is primary key for a user.
 
 Books views:
@@ -66,8 +66,8 @@ Books views:
 	/books_app/books/?days_ago=<int>
 	> List all books added by user within last <int> number of days
 - Retrieve:
-    /books_app/books/<pk>/
+    /books_app/books/<pk:int>/
     > Retrieves book record where pk is primary key for a book.
 - Delete:
-	/books_app/books/<pk>/
+	/books_app/books/<pk:int>/
 	> Delete book where pk is primary key for a book.  
