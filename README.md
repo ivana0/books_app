@@ -47,7 +47,7 @@ $ python3 manage.py runserver
 Usage
 -----------------------------------------------------------------
 UserProfile views:
-(Screenshots included in this same directory.)
+(Screenshots included in ./screenshots)
 - List:
 	/books_app/users/
 	> Lists all users.
@@ -59,7 +59,7 @@ UserProfile views:
 	> Delete user where pk is primary key for a user.
 
 Books views:
-(Screenshots included in this same directory.)
+(Screenshots included in ./screenshots)
 - List:
 	/books_app/books/
 	> Lists all books
