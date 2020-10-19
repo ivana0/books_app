@@ -27,9 +27,17 @@ Setup
 Run Docker:
 
 $ docker build -t books_app .
+
+
 $ docker-compose up --build
+
+
 $ docker-compose up
+
+
 	> $ docker-compose up db -> start db container
+	
+	
 	> $ docker-compose up web -> start books_app container
 
 Run App (no Docker):
