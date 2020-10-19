@@ -10,41 +10,55 @@ from books_app.models import UserProfile, Book
 from books_app.views import UserProfileViewSet, BooksViewSet
 
 class UserProfileTestCase(TestCase):
-	def setUp(self):
-    	self.user = User.objects.create_superuser(
-    		first_name='Test',
-            username='test_user',
-            password='testpassword',
+    """Test cases for UserProfile viewsets.
+    """
+    fixtures = ['initial_data.json',]
+    def setUp(self):
+        self.user = User.objects.create_user(
+            pk=50,
+            first_name='First',
+            username='Username',
+            password='Password',
             email='test_user@test.com'
         )
-
-        self.userprofile = UserProfile.objects.create(
-    		first_name='Test',
-            username='test_user',
-            password='testpassword',
+        self.userprofile, created = UserProfile.objects.get_or_create(
+            pk=50,
+            first_name='First',
+            username='Username',
+            password='Password',
             email='test_user@test.com',
             country='AU',
             user=self.user
-    	)
+        )
+        from django.core.management import call_command
+        data = call_command('loaddata', 'fixtures/initial_data.json', verbosity=0)
+        assertEqual(1,0)
+        print(data)
+
+        
 
     ### Test for CREATE ###
     def test_userprofile_viewset_create(self):
-    	self.test_profile = UserProfile.objects.create(
-    		first_name='Ivana',
+        # self.setUp()
+        self.test_profile = UserProfile.objects.create(
+            first_name='Ivana',
             username='ivana-test',
-            password='testpassword',
             email='ivana@test.com',
             country='AU',
+            password='testpassword',
             user=self.user
-    	)
-    	data = json.dumps({
+        )
+        data = json.dumps({
             "title": "",
             "author": "",
             "isbn": "9780575099968"
         })
+        # Setup APIClient
         client = APIClient()
         client.force_authenticate(user=self.user)
         response = client.post('/books_app/users/', data=data, content_type='application/json')
+
+        print(response)
         # Check if you get a 200 back:
         self.assertEqual(response.status_code, HTTPStatus.OK._value_)
         # Check to see if isbn was created
@@ -64,43 +78,48 @@ class UserProfileTestCase(TestCase):
 
     ### Test for LIST ###
     def test_userprofile_viewset_list(self):
-    	pass
+        pass
 
     ### Test for DELETE ###
     def test_userprofile_delete(self):
-    	pass
+        pass
 
 
 class BookTestCase(TestCase):
+    """Test cases for Books viewsets.
+    """
     def setUp(self):
-    	self.factory = RequestFactory()
-    	
-    	self.user = User.objects.create_superuser(
-    		first_name='Test',
+        self.factory = RequestFactory()
+        
+        self.user = User.objects.create_superuser(
+            first_name='Test',
             username='test_user',
             password='testpassword',
             email='test_user@test.com'
         )
 
         self.userprofile = UserProfile.objects.create(
-    		first_name='Test',
+            first_name='Test',
             username='test_user',
             password='testpassword',
             email='test_user@test.com',
             country='AU',
             user=self.user
-    	)
-    	force_authenticate(request, user=self.user)
+        )
+
+        client = APIClient()
+        response = client.post('/books_app/books/', data=data, content_type='application/json')
+        force_authenticate(request, user=self.user)
 
     ### Test for CREATE ###
     def test_book_viewset_create(self):
-    	self.book = Book.objects.create(
-    		title='Book',
+        self.book = Book.objects.create(
+            title='Book',
             author='test_user',
-    		isbn=''
+            isbn='',
             user=self.user
-    	)
-    	data = json.dumps({
+        )
+        data = json.dumps({
             "title": "",
             "author": "",
             "isbn": "9780575099968"
@@ -127,14 +146,14 @@ class BookTestCase(TestCase):
 
     ### Test for LIST ###
     def test_book_viewset_list(self):
-    	pass
+        pass
 
     ### Test for DELETE ###
     def test_book_viewset_delete(self):
-    	pass
+        pass
 
     def test_validate_book_by_isbn(self):
-    	pass
+        pass
 
     def test_validate_book_by_title(self):
-    	pass
+        pass
